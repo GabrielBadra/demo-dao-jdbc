@@ -1,9 +1,12 @@
 package model.entiteis;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Seller {
+public class Seller implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private Integer id;
 	private String name;
 	private String email;
@@ -12,6 +15,9 @@ public class Seller {
 	
 	private Department department;
 
+	public Seller() {
+	}
+	
 	public Seller(Integer id, String name, String email, Date birthDay, double baseSalary, Department department) {
 		this.id = id;
 		this.name = name;
@@ -69,9 +75,10 @@ public class Seller {
 		this.department = department;
 	}
 
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(baseSalary, birthDay, email, id, name);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -83,9 +90,7 @@ public class Seller {
 		if (getClass() != obj.getClass())
 			return false;
 		Seller other = (Seller) obj;
-		return Double.doubleToLongBits(baseSalary) == Double.doubleToLongBits(other.baseSalary)
-				&& Objects.equals(birthDay, other.birthDay) && Objects.equals(email, other.email)
-				&& Objects.equals(id, other.id) && Objects.equals(name, other.name);
+		return Objects.equals(id, other.id);
 	}
 
 	@Override
