@@ -1,15 +1,16 @@
 package application;
 
-import java.util.Date;
-
-import model.entiteis.Department;
+import modal.dao.DaoFactory;
+import modal.dao.SellerDao;
 import model.entiteis.Seller;
 
 public class Program {
 
 	public static void main(String[] args) {
 	
-		Seller seller = new Seller(21, "Bob", "bob@gmail.com", new Date(),300.0,new Department(2,"Carlos"));
+		SellerDao sellerdao = DaoFactory.createSellerDao();
+		Seller seller = sellerdao.findById(15);
+		
 		System.out.println(seller);
 	}
 
