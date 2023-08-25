@@ -49,6 +49,7 @@ public class Program {
 				
 				break;
 			case 1:
+				
 				System.out.print("Digite o ID: ");
 				id = sc.nextInt();
 				Seller sellerAux = sellerdao.findById(id);
@@ -56,10 +57,15 @@ public class Program {
 
 				break;
 			case 2:
+				List<Seller>sellerDepartment = sellerdao.findByDepartment(new Department(id, null));
+				System.out.print("DepartmentId: ");
+				List<Department> department = departmentDao.findAll();
+				for(Department obj: department) {
+					System.out.print(obj.getId() +", "+ obj.getName() + " / ");
+				}
+				System.out.println();
 				System.out.print("Digite o ID: ");
 				id = sc.nextInt();
-				List<Seller>sellerDepartment = sellerdao.findByDepartment(new Department(id, null));
-				
 				for (Seller obj : sellerDepartment) {
 					System.out.println(obj);
 				}
@@ -82,7 +88,7 @@ public class Program {
 				System.out.print("BaseSalary: ");
 				double baseSalary = sc.nextDouble();
 				System.out.println("Department: ");
-				List<Department> department = departmentDao.findAll();
+				department = departmentDao.findAll();
 				for(Department obj: department) {
 					System.out.print(obj.getId() +", "+ obj.getName() + " / ");
 				}
