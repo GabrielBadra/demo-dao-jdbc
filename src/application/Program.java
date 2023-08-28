@@ -30,11 +30,10 @@ public class Program {
 			System.out.println("OPÇÕES DO DEPARTMENT");
 			System.out.print("[6] Departmentos cadastrados / ");
 			System.out.print("[7] filtrar por id / ");
-			System.out.print("[8] filtrar por department / ");
-			System.out.println("[9] Deletar por ID  'seller' / ");
-			System.out.print("[10] Inserir um Seller / ");
-			System.out.print("[11] Uptade um Seller' / ");
-			System.out.println("[12] para sair!");
+			System.out.println("[8] Deletar por ID  '' / ");
+			System.out.print("[9] Inserir um Department / ");
+			System.out.print("[10] Uptade um Department' / ");
+			System.out.println("[11] para sair!");
 			System.out.print("Deseja executar algo? (Digite os numeros):  ");
 			res = sc.nextInt();
 			int id =0;
@@ -135,9 +134,54 @@ public class Program {
 					sellerdao.uptade(seller);
 					break;
 				}
+			case 6:
+				List<Department> departmentCadastrado = departmentDao.findAll();
+				System.out.println("Departmentos Cadastrados: ");
+				for(Department obj: departmentCadastrado) {
+					if(obj.getId() != 0)
+					System.out.println(obj.getName() + ", ");
+				}
+				break;
+			case 7:
+				System.out.print("Escolha o ID: ");
+				id = sc.nextInt();
+				Department departmentAux = departmentDao.findById(id);
+				System.out.println(departmentAux);
+				break;
+			case 8:
+				department = departmentDao.findAll();
+				for(Department obj: department) {
+					System.out.print(obj.getId() +", "+ obj.getName() + " / ");
+				}
+				System.out.println(" ");
+				System.out.print("Digite o id do department que quer deletar: ");
+				id = sc.nextInt();
+				if(id != 0)
+				departmentDao.deleteById(id);
+				break;
+			case 9: 
+				department = departmentDao.findAll();
+				for(Department obj: department) {
+					System.out.print(obj.getId() +", "+ obj.getName() + " / ");
+				}
+				System.out.print("Escolha o numero do departmento: ");
+				id = sc.nextInt();
+				
+				departmentDao.insert(new Department(id, null));
+				break;
+			case 10:
+				System.out.print("UPDATE seller escolha um id: ");
+				id = sc.nextInt();
+				departmentAux = departmentDao.findById(id);
+				
+				System.out.print("New name: ");
+				name = sc.next();
+				departmentAux.setName(name);
+				
+				departmentDao.uptade(departmentAux);
 			}
 			
-		} while (res != 12);
+		} while (res != 11);
 
 		System.out.println("ACABOU!");
 		System.out.println(res);
